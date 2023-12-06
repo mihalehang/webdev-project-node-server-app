@@ -7,8 +7,8 @@ function LikesRoutes(app) {
         res.send(likes);
     };
     const createUserLikesMovie = async (req, res) => {
-        const { userId, albumId } = req.params;
-        const like = await dao.createUserLikesMovie(userId, albumId);
+        const { userId, movieId } = req.params;
+        const like = await dao.createUserLikesMovie(userId, movieId);
         res.send(like);
     };
     const findMoviessUserLikes = async (req, res) => {
@@ -17,15 +17,15 @@ function LikesRoutes(app) {
         res.send(likes);
     };
     const findUsersWhoLikeMovie = async (req, res) => {
-        const { albumId } = req.params;
-        const likes = await dao.findUsersWhoLikeMovie(albumId);
+        const { movieId } = req.params;
+        const likes = await dao.findUsersWhoLikeMovie(movieId);
         res.send(likes);
     };
 
     app.get('/api/likes', findAllLikes);
-    app.post('/api/users/:userId/likes/:albumId', createUserLikesMovie);
+    app.post('/api/users/:userId/likes/:movieId', createUserLikesMovie);
     app.get('/api/users/:userId/likes', findMoviessUserLikes);
-    app.get('/api/albums/:albumId/likes', findUsersWhoLikeMovie);
+    app.get('/api/movies/:movieId/likes', findUsersWhoLikeMovie);
 }
 
 export default LikesRoutes;
