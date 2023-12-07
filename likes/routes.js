@@ -28,11 +28,19 @@ function LikesRoutes(app) {
         res.send(status);
     }
 
+    const findUsersRecentLike = async (req, res) => {
+        const { userId } = req.params;
+        const like = await dao.findUsersRecentLike(userId);
+        res.send(like);
+    }
+
     app.get('/api/likes', findAllLikes);
     app.post('/api/users/:userId/:userName/likes/:movieId/:movieTitle', createUserLikesMovie);
     app.get('/api/users/:userId/likes', findMoviessUserLikes);
     app.get('/api/movies/:movieId/likes', findUsersWhoLikeMovie);
     app.delete('/api/users/:userId/likes/:movieId', deleteUserLikesMovie);
+    app.get('/api/users/:userId/likes/recent', findUsersRecentLike);
+
 }   
 
 export default LikesRoutes;

@@ -6,3 +6,4 @@ export const findMoviessUserLikes = (userId) => model.find({ user: userId });
 export const findUsersWhoLikeMovie = (movieId) => model.find({ movieId: movieId });
 export const deleteUserLikesMovie = (userId, movieId) => 
     model.deleteOne({user: userId, movieId: movieId});
+export const findUsersRecentLike = (userId) => model.find({ user: userId}).sort({_id: -1}).limit(1);
