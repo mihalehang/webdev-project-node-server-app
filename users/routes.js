@@ -1,4 +1,4 @@
-import * as dao from "./dao.js";
+import * as dao from './dao.js';
 
 function UserRoutes(app) {
     const signin = async (req, res) => {
@@ -21,6 +21,10 @@ function UserRoutes(app) {
         const users = await dao.findAllUsers();
         res.json(users);
     };
+    const findRecentUserAdded = async (req, res) => {
+        const users = await dao.findRecentUserAdded();
+        res.json(users);
+    };
     const createUser = async (req, res) => {
         const user = await dao.createUser(req.body);
         res.json(user);
@@ -33,13 +37,10 @@ function UserRoutes(app) {
         const status = await dao.deleteUser(req.params.userId);
         res.json(status);
     };
-
     const signup = async (req, res) => {
-        const user = await dao.findUserByUsername(
-          req.body.username);
+        const user = await dao.findUserByUsername(req.body.username);
         if (user) {
-          res.status(400).json(
-            { message: "Username already taken" });
+            res.status(400).json({ message: 'Username already taken' });
         }
         const currentUser = await dao.createUser(req.body);
         req.session['currentUser'] = currentUser;
@@ -51,14 +52,15 @@ function UserRoutes(app) {
         res.json(200);
     };
 
-    app.post("/api/users", createUser);
-    app.get("/api/users", findAllUsers);
-    app.get("/api/users/:userId", findUserById);
-    app.put("/api/users/:userId", updateUser);
-    app.delete("/api/users/:userId", deleteUser);
-    app.post("/api/users/signup", signup);
-    app.post("/api/users/signin", signin);
-    app.post("/api/users/signout", signout);
-    app.post("/api/users/account", account);
+    app.post('/api/users', createUser);
+    app.get('/api/users', findAllUsers);
+    app.get('/api/users/recent', findRecentUserAdded);
+    app.get('/api/users/:userId', findUserById);
+    app.put('/api/users/:userId', updateUser);
+    app.delete('/api/users/:userId', deleteUser);
+    app.post('/api/users/signup', signup);
+    app.post('/api/users/signin', signin);
+    app.post('/api/users/signout', signout);
+    app.post('/api/users/account', account);
 }
 export default UserRoutes;
