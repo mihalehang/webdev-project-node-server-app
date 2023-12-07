@@ -2,7 +2,6 @@ import * as dao from './dao.js';
 
 function FollowsRoutes(app) {
     const findAllFollows = async (req, res) => {
-        console.log('findAllFollows');
         const follows = await dao.findAllFollows();
         res.send(follows);
     };
