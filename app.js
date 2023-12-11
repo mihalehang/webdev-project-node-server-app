@@ -7,7 +7,7 @@ import UserRoutes from './users/routes.js';
 import LikesRoutes from "./likes/routes.js";
 import FollowsRoutes from "./follows/routes.js";
 
-const CONNECTION_STRING = "mongodb://127.0.0.1:27017/webdevproject";
+const CONNECTION_STRING = process.env.WEB_DEV_PROJECT_DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/webdevproject";
 // this assumes mongodb compass local connection to a db called webdevproject
 // for now use the supplied data from A5/A6
 
