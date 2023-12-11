@@ -5,6 +5,7 @@ const schema = new mongoose.Schema(
         userName: String,
         movieId: String,
         movieTitle: String,
+        poster: String,
     },
     { collection: 'likes' }
 );

@@ -8,7 +8,8 @@ function LikesRoutes(app) {
     };
     const createUserLikesMovie = async (req, res) => {
         const { userId, userName, movieId, movieTitle } = req.params;
-        const like = await dao.createUserLikesMovie(userId, userName, movieId, movieTitle);
+        const { poster } = req.body;
+        const like = await dao.createUserLikesMovie(userId, userName, movieId, movieTitle, poster);
         res.send(like);
     };
     const findMoviessUserLikes = async (req, res) => {
